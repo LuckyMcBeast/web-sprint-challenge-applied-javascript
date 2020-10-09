@@ -9,3 +9,19 @@
 //    <div class="tab">topic here</div>
 //
 // NOTE: you do _not_ need to install axios as it's included in the HTML via script element
+
+
+import axios from 'axios'
+
+
+const getData = (url =>{
+    axios.get(url)
+    .then(response => {
+        console.log(response)
+    })
+    .catch(err => {
+        console.log(err);
+    });
+  })
+
+  getData('https://lambda-times-api.herokuapp.com/topics');
