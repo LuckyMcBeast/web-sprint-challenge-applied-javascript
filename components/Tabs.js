@@ -13,15 +13,30 @@
 
 import axios from 'axios'
 
+const topics = document.querySelector('.topics');
+
+const tab = (topic => {
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(topic));
+    div.classList.add('tab');
+
+    return div;
+});
 
 const getData = (url =>{
     axios.get(url)
     .then(response => {
-        console.log(response)
+        console.log(response);
+        response.data.topics.forEach(topic => {
+            topics.append(tab(topic))
+        })
     })
     .catch(err => {
         console.log(err);
     });
   })
-
+  
   getData('https://lambda-times-api.herokuapp.com/topics');
+
+  
+
