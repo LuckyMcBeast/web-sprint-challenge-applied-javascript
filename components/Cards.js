@@ -63,7 +63,8 @@ const getArticleData = (url => {
             console.log(response.data.articles.javascript);
             for (const articleGroup in response.data.articles){
                 response.data.articles[articleGroup].forEach(article => {
-                    cardsContainer.append(card(article));
+                    cardsContainer.appendChild(card(article));
+                    cardsContainer.lastChild.classList.add(articleGroup);
                 })
             }
         })

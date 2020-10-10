@@ -18,7 +18,37 @@ const topics = document.querySelector('.topics');
 const tab = (topic => {
     const div = document.createElement('div');
     div.appendChild(document.createTextNode(topic));
-    div.classList.add('tab');
+    div.classList.add('tab', `topic-${topic}`);
+
+    div.addEventListener('click', e => {
+        let clickedTopic = topic;
+        const containerSelector = document.querySelector('.cards-container');
+        const topicSelector = [].slice.call(containerSelector.children);
+        console.log(topicSelector);
+        if(clickedTopic == 'node.js'){
+            clickedTopic = 'node';
+        }
+        if(clickedTopic == 'all'){
+            topicSelector.forEach(article => {
+                if(!article.classList.contains('card')){
+                    article.classList.add('card');
+                    article.classList.remove('hide');
+                }
+            })
+        }
+        else{
+        topicSelector.forEach(article => {
+            if(!article.classList.contains('card')){
+                article.classList.add('card');
+                article.classList.remove('hide');
+            }
+            if(!article.classList.contains(clickedTopic)){
+                article.classList.toggle('hide');
+                article.classList.toggle('card');
+            }
+        })
+    }
+    });
 
     return div;
 });
@@ -27,6 +57,7 @@ const getTopicData = (url => {
     axios.get(url)
         .then(response => {
             console.log(response);
+            topics.append(tab('all'))
             response.data.topics.forEach(topic => {
                 topics.append(tab(topic))
             })
