@@ -23,20 +23,20 @@ const tab = (topic => {
     return div;
 });
 
-const getData = (url =>{
+const getTopicData = (url => {
     axios.get(url)
-    .then(response => {
-        console.log(response);
-        response.data.topics.forEach(topic => {
-            topics.append(tab(topic))
+        .then(response => {
+            console.log(response);
+            response.data.topics.forEach(topic => {
+                topics.append(tab(topic))
+            })
         })
-    })
-    .catch(err => {
-        console.log(err);
-    });
-  })
-  
-  getData('https://lambda-times-api.herokuapp.com/topics');
+        .catch(err => {
+            console.log(err);
+        });
+});
 
-  
+getTopicData('https://lambda-times-api.herokuapp.com/topics');
+
+
 
